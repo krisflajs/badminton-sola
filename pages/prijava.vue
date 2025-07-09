@@ -85,7 +85,7 @@ const handleSubmit = (event: FormSubmitEvent<typeof state.value>) => {
                 {{ state.datumRojstva ? df.format(state.datumRojstva.toDate("UTC")) : 'Izberi datum' }}
               </UButton>
               <template #content>
-                <UCalendar v-model="datumRojstva" class="p-2" @update:model-value="() => { state.datumRojstva = datumRojstva; koledarOdprt = false; }" />
+                <UCalendar v-model="datumRojstva" class="p-2" :max-value="new CalendarDate(new Date().getUTCFullYear(), new Date().getUTCMonth()+1, new Date().getUTCDate())" @update:model-value="() => { state.datumRojstva = datumRojstva; koledarOdprt = false; }" />
               </template>
             </UPopover>
           </UFormField>

@@ -9,7 +9,7 @@ async function main() {
     create: {
       imePriimek: "Janez Novak",
       email: "janez@gmail.com",
-      telefon: "+386 41 234 567",
+      telefon: "041 234 567",
       datumRojstva: new Date("1990-01-01"),
       izkusenost: "TEKMOVALEC",
       proizvajalciLoparjev: ["Yonex", "Babolat"],
@@ -28,7 +28,7 @@ async function main() {
     create: {
       imePriimek: "Metka Novak",
       email: "metka@gmail.com",
-      telefon: "+386 41 234 568",
+      telefon: "041 234 568",
       datumRojstva: new Date("1998-06-02"),
       izkusenost: "ZACETNIK",
       proizvajalciLoparjev: ["Wilson"],
