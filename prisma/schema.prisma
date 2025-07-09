@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Izkusenost {
+  ZACETNIK
+  REKREATIVEC
+  TEKMOVALEC
+}
+
+model Prijava {
+  id        Int   @id @default(autoincrement())
+  imePriimek       String
+  email     String
+  telefon   String?
+  datumRojstva DateTime
+  izkusenost Izkusenost
+  proizvajalciLoparjev String[] @default([])
+  objavaSlik Boolean
+  obdelavaPodatkov Boolean
+  dodatno Json?
+
+  @@map("prijave")
+}
