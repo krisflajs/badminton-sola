@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 import emptyToNull from "~/server/utils/emptyToNull";
 
 const prisma = new PrismaClient();
@@ -15,16 +15,16 @@ export default defineEventHandler(async (event) => {
     })
     .catch((error) => {
       console.error(error);
-      let reason = "Unknown error";
-      if (error instanceof Prisma.PrismaClientValidationError) {
-        const lines = error.message.split("\n");
-        reason = lines[lines.length - 1];
-      } else {
-        reason = error.message;
-      }
+      // let reason = "Unknown error";
+      // if (error instanceof Prisma.PrismaClientValidationError) {
+      //   const lines = error.message.split("\n");
+      //   reason = lines[lines.length - 1];
+      // } else {
+      //   reason = error.message;
+      // }
       return createError({
-        statusCode: 400,
-        message: `Prijava ni bila uspešna: ${reason}`,
+        statusCode: 500,
+        message: `Prijava ni bila uspešna`,
       });
     });
 

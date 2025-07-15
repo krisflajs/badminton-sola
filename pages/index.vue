@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TableColumn } from "@nuxt/ui";
-import type { Prijava } from "@/generated/prisma";
+import type { Prijava } from "@prisma/client";
 
 const { data: prijave, pending } = await useFetch<Prijava[]>("/api/prijave");
 

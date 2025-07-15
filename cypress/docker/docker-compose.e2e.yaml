@@ -1,0 +1,36 @@
+name: badminton-e2e
+services:
+  db:
+    image: "postgres:16"
+    env_file:
+      - db.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    build:
+      context: ../../
+      dockerfile: cypress/docker/migrate.Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - db.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/badminton_test
+
+  app:
+    build:
+      context: ../../
+      dockerfile: cypress/docker/nuxt.Dockerfile
+    ports:
+      - "3005:80"
+    depends_on:
+      - migrate
+    env_file:
+      - db.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/badminton_test

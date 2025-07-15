@@ -1,0 +1,7 @@
+{
+  "include": ["./e2e/**/*", "./support/**/*"],
+  "compilerOptions": {
+    "types": ["cypress", "node"],
+    "isolatedModules": false
+  }
+}
