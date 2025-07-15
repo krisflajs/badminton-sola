@@ -23,4 +23,5 @@ logs
 .env.*
 !.env.example
 
-/generated/prisma
+cypress/screenshots
+cypress/videos

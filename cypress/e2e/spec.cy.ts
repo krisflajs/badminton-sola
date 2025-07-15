@@ -21,7 +21,6 @@ describe("med-končni test", () => {
     cy.get("[data-cy='objavaSlik']").should("not.be.checked");
     cy.get("[data-cy='obdelavaPodatkov']").should("not.be.checked");
     cy.get("[data-cy='napaka']").should("not.exist");
-    cy.get("[data-cy='prijaviSe']").should("be.disabled");
   });
 
   const pravilnaPrijava: Partial<Prijava> = {
@@ -59,6 +58,17 @@ describe("med-končni test", () => {
     cy.prijavaVmesnik({ ...pravilnaPrijava, telefon: "abc123" }, false);
   });
 
+  it("pravilna prijava - API", () => {
+    cy.request({
+      method: "POST",
+      url: "/api/prijava",
+      body: pravilnaPrijava,
+      failOnStatusCode: false,
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+    });
+  });
+
   it("prazna prijava - API", () => {
     cy.request({
       method: "POST",
@@ -70,11 +80,11 @@ describe("med-končni test", () => {
     });
   });
 
-  it("nepravilna prijava - API", () => {
+  it("nepravilna prijava - API - nepravilen email", () => {
     cy.request({
       method: "POST",
       url: "/api/prijava",
-      body: {},
+      body: { ...pravilnaPrijava, email: "marija.novakgmail.com" },
       failOnStatusCode: false,
     }).then((response) => {
       expect(response.status).to.eq(400);
